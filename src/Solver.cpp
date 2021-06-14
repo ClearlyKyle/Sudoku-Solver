@@ -98,14 +98,12 @@ int Solver::solve(QVector<QVector<int>> &bo)
 			bo[find[0]][find[1]] = i;
 
 			emit valueChanged(bo);
-			//QCoreApplication::processEvents();
 
 			if (solve(bo))
 			{
 				return 1;
 			}
 			bo[find[0]][find[1]] = 0;
-			// Board::vis_solution(bo);
 		}
 	}
 
@@ -114,7 +112,6 @@ int Solver::solve(QVector<QVector<int>> &bo)
 
 QVector<QVector<int>> Solver::solution()
 {
-
 	print_board();
 	solve(board);
 	return board;
@@ -123,4 +120,5 @@ QVector<QVector<int>> Solver::solution()
 void Solver::set_board(QVector<QVector<int>> bo)
 {
 	board = bo;
+	intitial_values = bo;
 }

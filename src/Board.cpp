@@ -3,9 +3,7 @@
 #include <QLineEdit>
 #include <QDebug>
 #include <QValidator>
-//#include <QtGui/QIntValidator>
 #include <QRegularExpressionValidator>
-//#include <QRegExp>
 #include <QTime>
 #include <QCoreApplication>
 #include <QApplication>
@@ -26,12 +24,15 @@ Board::Board(QWidget *parent)
 	for (auto lineEdit : this->findChildren<QLineEdit *>())
 	{
 		// regexp: optional '-' followed by between 1 and 3 digits
-		QRegularExpression rx("[1-9]");
+		QRegularExpression rx("[0-9 ]");
 		QValidator *validator = new QRegularExpressionValidator(rx, this);
 
 		// connect lineEdit or change values
 		lineEdit->setValidator(validator);
 	}
+
+	// connect(lineEdit, &QLineEdit::textChanged, this, &Board::)
+
 	connect(ui->cmd_solve, SIGNAL(pressed()), this, SLOT(cmd_solve()));
 	connect(ui->clear, SIGNAL(pressed()), this, SLOT(clear_screen()));
 }
@@ -82,28 +83,34 @@ void Board::add_solution()
 
 	qDebug("ADD_SOLUTION");
 
-	for (int k = 0; k < solution.size(); k++)
-	{
-		for (int l = 0; l < solution[k].size(); l++)
-		{
-			dbg.nospace() << solution[k][l] << " ";
-		}
-		dbg << "\n";
-	}
+	//for (int k = 0; k < solution.size(); k++)
+	//{
+	//	for (int l = 0; l < solution[k].size(); l++)
+	//	{
+	//		// dbg.nospace() << solution[k][l] << " ";
+	//	}
+	//	// dbg << "\n";
+	//}
 
 	for (auto lineEdit : this->findChildren<QLineEdit *>())
 	{
+		if (solution[j][i] == 0) {
+			qDebug() << "Adding Blank\n";
+			lineEdit->setText(" ");
+		} else {
+			qDebug() << "Adding Number\n";
+			lineEdit->setText(QString::number(solution[j][i]));
+		}
 
-		lineEdit->setText(QString::number(solution[j][i]));
 		lineEdit->update();
 		QCoreApplication::processEvents();
 
-		QTime dieTime = QTime::currentTime().addMSecs(40);
-		while (QTime::currentTime() < dieTime)
+		//QTime dieTime = QTime::currentTime().addMSecs(40);
+		//while (QTime::currentTime() < dieTime)
 			// QCoreApplication::processEvents();
 
 			// delay();
-			qDebug() << lineEdit << solution[j][i] << QString::number(solution[j][i]);
+			//qDebug() << lineEdit << solution[j][i] << QString::number(solution[j][i]);
 		/*if (lineEdit->text().isEmpty())
 		{
 			qDebug("Something here");
@@ -151,6 +158,11 @@ void Board::clear_screen()
 	{
 		qDebug() << "NO was clicked";
 	}
+}
+
+void Board::reset_board()
+{
+	
 }
 
 void Board::board_update(QVector<QVector<int>> bo)

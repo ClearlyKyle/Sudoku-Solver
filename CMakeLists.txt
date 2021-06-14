@@ -23,12 +23,8 @@ file(GLOB_RECURSE SOURCES
     "${SOURCE_DIR}/*.cpp"
 )
 
-#find_package(Qt6Core REQUIRED)
-#find_package(Qt6Widgets REQUIRED)
-
+# Using Vcpkg
 find_package(Qt6 REQUIRED Core Widgets Gui Core5Compat)
-## find_package(Qt6 COMPONENTS Core REQUIRED)
-# find_package(Qt6 COMPONENTS Core5Compat REQUIRED)
 
 # Add the forms directory to the AUTOUIC search paths
 set(CMAKE_AUTOUIC_SEARCH_PATHS ${CMAKE_AUTOUIC_SEARCH_PATHS} ${FORMS_DIR})

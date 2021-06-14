@@ -16,6 +16,7 @@ private:
 
 	QVector<QVector<QVector <int>>> vis_sol;
 	QVector<QVector <int>> board;
+	QVector<QVector <int>> intitial_values;
 
 public:
 	explicit Solver(QObject *parent = nullptr);

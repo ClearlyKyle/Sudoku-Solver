@@ -35,6 +35,7 @@ public:
 private slots:
 	void cmd_solve();
 	void clear_screen();
+	void reset_board();
 
 public slots:
 	void board_update(QVector<QVector<int>>);
