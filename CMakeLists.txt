@@ -37,5 +37,3 @@ target_include_directories(${CMAKE_PROJECT_NAME} PRIVATE ${INCLUDE_DIR})
 target_include_directories(${CMAKE_PROJECT_NAME} PRIVATE ${SOURCE_DIR})
 
 target_link_libraries(${CMAKE_PROJECT_NAME} Qt6::Core Qt6::Widgets Qt6::Core5Compat Qt6::Gui)
-
-# target_link_libraries(${CMAKE_PROJECT_NAME} Qt6::Widgets)
